@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>🍉 Watermelon Museum — Houda's Adventure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
+html,body{margin:0;height:100%;overflow:hidden;background:#0a0a14;font-family:'Quicksand',system-ui,sans-serif;color:#fff}
+button{font-family:'Baloo 2',system-ui,sans-serif;cursor:pointer;border:none;outline:none}
+#game-container{position:fixed;inset:0;z-index:0}
+#game-container canvas{display:block}
+
+#crosshair{position:fixed;top:50%;left:50%;z-index:3;transform:translate(-50%,-50%);width:20px;height:20px;pointer-events:none;opacity:0;transition:opacity .3s}
+#crosshair::before,#crosshair::after{content:'';position:absolute;background:rgba(255,255,255,0.7);border-radius:2px}
+#crosshair::before{top:9px;left:0;width:20px;height:2px}
+#crosshair::after{top:0;left:9px;width:2px;height:20px}
+#crosshair .dot{position:absolute;top:8px;left:8px;width:4px;height:4px;border-radius:50%;background:#ff6b7d;box-shadow:0 0 6px #ff6b7d}
+
+#hud{position:fixed;top:0;left:0;right:0;z-index:2;padding:10px 14px;display:none;justify-content:space-between;align-items:flex-start;pointer-events:none;gap:8px}
+.hud-row{display:flex;gap:8px;flex-wrap:wrap}
+.hud-pill{background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);padding:5px 12px;border-radius:999px;font-family:'Baloo 2',system-ui,sans-serif;font-weight:700;font-size:0.75rem;border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.hud-pill.danger{border-color:#ff4444}
+.hud-pill.warning{border-color:#ffc94d}
+.hud-pill.room{background:rgba(100,60,200,0.5);border-color:#8a4bff}
+#hpFillBar{width:45px;height:6px;background:#333;border-radius:3px;overflow:hidden;display:inline-block;vertical-align:middle}
+#hpFillBar span{display:block;height:100%;background:linear-gradient(90deg,#ff4444,#ff6b7d);border-radius:3px;transition:width .3s}
+#notif{position:fixed;top:72px;left:50%;z-index:4;transform:translateX(-50%);font-family:'Baloo 2',system-ui,sans-serif;font-weight:700;font-size:1rem;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);padding:10px 22px;border-radius:999px;border:2px solid #ffc94d;opacity:0;transition:all .4s;pointer-events:none;text-align:center}
+#notif.show{opacity:1}
+
+#interactPrompt{position:fixed;bottom:100px;left:50%;z-index:4;transform:translateX(-50%);font-family:'Baloo 2',system-ui,sans-serif;font-weight:700;font-size:0.85rem;background:rgba(0,0,0,0.8);backdrop-filter:blur(4px);padding:8px 18px;border-radius:999px;border:2px solid #ffc94d;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+#interactPrompt.show{opacity:1}
+
+#loading{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:#1a1530;color:rgba(255,255,255,0.3);font-family:system-ui,sans-serif;font-size:0.9rem}
+#pointerLockHint{position:fixed;inset:0;z-index:6;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px)}
+#pointerLockHint .hint-card{background:#1e1e32;padding:36px;border-radius:26px;max-width:380px;text-align:center;border:1px solid rgba(255,255,255,0.06)}
+#pointerLockHint .hint-icon{font-size:3rem;display:block;margin-bottom:10px}
+#pointerLockHint .hint-sub{font-size:0.7rem;opacity:0.5;margin-top:8px}
+
+.overlay{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:rgba(10,5,25,0.85);backdrop-filter:blur(8px);padding:20px;transition:opacity .5s}
+.overlay.hidden{opacity:0;pointer-events:none}
+.card{background:linear-gradient(145deg,#252040,#1a1530);border-radius:26px;padding:32px 28px;max-width:460px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.06)}
+.eyebrow{font-family:'Baloo 2',system-ui,sans-serif;letter-spacing:0.2em;text-transform:uppercase;font-size:10px;font-weight:700;color:#ffc94d;margin-bottom:6px}
+h1.title{font-family:'Baloo 2',system-ui,sans-serif;font-weight:800;font-size:clamp(1.4rem,5vw,2.1rem);margin:4px 0 12px;line-height:1.3}
+h1.title.pink{color:#ff6b7d}
+h1.title.sun{color:#ffc94d}
+p.lede{font-weight:500;font-size:0.9rem;line-height:1.55;margin:0 0 18px;opacity:0.8}
+.btn-primary{background:linear-gradient(135deg,#ff6b7d,#e6465e);color:#fff;font-weight:700;font-size:0.95rem;padding:12px 28px;border-radius:999px;box-shadow:0 8px 24px rgba(230,70,94,0.35);transition:transform .2s;text-decoration:none;display:inline-block}
+.btn-primary:hover{transform:scale(1.05)}
+.btn-ghost{background:transparent;color:rgba(255,255,255,0.5);font-weight:700;font-size:0.8rem;padding:8px;margin-top:6px}
+.btn-ghost:hover{color:#fff}
+
+#bossBar{position:fixed;bottom:70px;left:50%;z-index:3;transform:translateX(-50%);display:none;flex-direction:column;align-items:center;gap:3px;width:min(70%,280px)}
+#bossBar .label{font-family:'Baloo 2',system-ui,sans-serif;font-weight:700;font-size:0.7rem;color:#ff6b7d;text-transform:uppercase;letter-spacing:0.15em}
+#bossBar .track{width:100%;height:8px;background:#222;border-radius:4px;overflow:hidden;border:1px solid rgba(255,255,255,0.08)}
+#bossBar .fill{height:100%;background:linear-gradient(90deg,#ff4444,#ff6b7d);border-radius:4px;transition:width .3s}
+
+#oracleOverlay .card{max-width:500px;padding:28px 24px}
+.oracle-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.oracle-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#8a4bff,#ff6bcd);display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.oracle-name{font-family:'Baloo 2',system-ui,sans-serif;font-weight:800;font-size:1.1rem;color:#c9a6e0}
+.oracle-status{font-size:0.7rem;opacity:0.5}
+.oracle-chat{background:rgba(0,0,0,0.3);border-radius:12px;padding:14px;min-height:80px;max-height:200px;overflow-y:auto;margin-bottom:12px;text-align:left;font-size:0.85rem;line-height:1.5;border:1px solid rgba(255,255,255,0.05)}
+.oracle-chat .msg{opacity:0;animation:fadeIn .4s forwards;margin-bottom:6px}
+.oracle-chat .oracle-msg{color:#c9a6e0}
+.oracle-btn{background:linear-gradient(135deg,#8a4bff,#ff6bcd);color:#fff;font-weight:700;font-size:0.85rem;padding:9px 20px;border-radius:999px}
+.oracle-btn:disabled{opacity:0.4}
+
+.minigame-hud{position:fixed;bottom:110px;left:50%;z-index:3;transform:translateX(-50%);display:none;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+.minigame-hud .timer{font-family:'Baloo 2',system-ui,sans-serif;font-weight:800;font-size:2rem;color:#ffc94d;text-shadow:0 0 20px rgba(255,201,77,0.3)}
+.minigame-hud .objective{font-size:0.8rem;opacity:0.7}
+.minigame-hud .progress{display:flex;gap:6px}
+.minigame-hud .progress span{width:10px;height:10px;border-radius:50%;background:#333;border:1px solid rgba(255,255,255,0.1);transition:all .3s}
+.minigame-hud .progress span.done{background:#44ff88;border-color:#44ff88;box-shadow:0 0 8px rgba(68,255,136,0.4)}
+.room-complete{position:fixed;top:50%;left:50%;z-index:5;transform:translate(-50%,-50%) scale(0);font-family:'Baloo 2',system-ui,sans-serif;font-weight:800;font-size:clamp(1.3rem,4vw,1.8rem);text-align:center;transition:all .5s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none}
+.room-complete.show{transform:translate(-50%,-50%) scale(1)}
+.room-complete .emoji{font-size:clamp(2rem,6vw,3rem);display:block;margin-bottom:4px}
+.room-complete .label{color:#ffc94d;text-shadow:0 4px 20px rgba(255,201,77,0.3)}
+.room-complete .desc{font-size:0.55em;color:rgba(255,255,255,0.5);font-weight:500;margin-top:2px}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes heartbeat{0%,100%{transform:scale(1)}25%{transform:scale(1.15)}35%{transform:scale(1)}45%{transform:scale(1.1)}55%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:0.001ms!important;transition-duration:0.001ms!important}}
+</style>
+</head>
+<body>
+
+<div id="loading">Loading...</div>
+<div id="game-container"></div>
+<div id="crosshair"><div class="dot"></div></div>
+
+<div id="hud">
+  <div class="hud-row">
+    <div class="hud-pill danger">❤️ <span id="hpText">100</span> <span id="hpFillBar"><span id="hpFill" style="width:100%"></span></span></div>
+    <div class="hud-pill room" id="roomName">🌅 Welcome Hall</div>
+  </div>
+  <div class="hud-row" style="flex-direction:row-reverse">
+    <div class="hud-pill" id="weapDisplay">🔫 Pistol</div>
+    <div class="hud-pill" id="ammoDisplay">∞</div>
+    <div class="hud-pill" style="background:rgba(138,75,255,0.5);border-color:#8a4bff;cursor:pointer;pointer-events:auto" id="oracleHudBtn">🔮 Ask</div>
+  </div>
+</div>
+
+<div id="notif"></div>
+<div id="interactPrompt">🔮 Press <b>E</b></div>
+<div id="bossBar"><div class="label">👹 Boss</div><div class="track"><div class="fill" id="bossFill" style="width:100%"></div></div></div>
+
+<div class="minigame-hud" id="minigameHud">
+  <div class="timer" id="mgTimer"></div>
+  <div class="objective" id="mgObjective"></div>
+  <div class="progress" id="mgProgress"></div>
+</div>
+
+<div id="roomComplete" class="room-complete"><span class="emoji" id="rcEmoji"></span><div class="label" id="rcLabel"></div><div class="desc" id="rcDesc"></div></div>
+
+<div id="pointerLockHint">
+  <div class="hint-card">
+    <div class="hint-icon">🖱️</div>
+    <div>Click to look around</div>
+    <div class="hint-sub">WASD move • Click shoot • E interact • Q weapon</div>
+  </div>
+</div>
+
+<div class="overlay" id="startOverlay">
+  <div class="card">
+    <div class="eyebrow">🎂 A Birthday Adventure</div>
+    <h1 class="title pink">The Watermelon<br>Museum</h1>
+    <p class="lede">Houda, enter a magical museum with <strong>8 themed rooms</strong>. Each room has a challenge. Complete all to unlock your birthday surprise! 🍉🎉</p>
+    <p style="font-size:0.75rem;opacity:0.4;margin:-8px 0 14px">Made with love by Mohamed ❤️</p>
+    <button class="btn-primary" id="enterBtn">Enter the Museum 🎮</button>
+  </div>
+</div>
+
+<div class="overlay hidden" id="gameOverOverlay">
+  <div class="card">
+    <div class="eyebrow">💀 Oh No!</div>
+    <h1 class="title pink">You Fainted</h1>
+    <p class="lede">The museum got the best of you! But Houda never gives up.</p>
+    <button class="btn-primary" id="retryBtn">Try Again 💪</button>
+  </div>
+</div>
+
+<div class="overlay hidden" id="oracleOverlay">
+  <div class="card">
+    <div class="oracle-header">
+      <div class="oracle-avatar">🔮</div>
+      <div><div class="oracle-name">Ora the Oracle</div><div class="oracle-status" id="oracleStatus">✨ Ready</div></div>
+    </div>
+    <div class="oracle-chat" id="oracleChat"><div class="msg oracle-msg">✨ Welcome, Houda. Eight rooms await. Seek the light in each one... 🍉</div></div>
+    <button class="oracle-btn" id="oracleAskBtn">🔮 Ask for a Hint</button>
+    <button class="btn-ghost" id="oracleCloseBtn">Close</button>
+  </div>
+</div>
+
+<div class="overlay hidden" id="finaleOverlay">
+  <div class="card">
+    <div style="font-size:clamp(2rem,7vw,3.5rem);margin-bottom:8px;animation:heartbeat 1.5s infinite">🎂</div>
+    <div class="eyebrow">🎉 All 8 Rooms Complete!</div>
+    <h1 class="title sun">Happy Birthday,<br>Houda! 🎉</h1>
+    <p class="lede">You explored every room, conquered every challenge, and filled this museum with your magic. Just like you light up every room you walk into in real life.<br><br>Love you more than watermelons in July 🍉❤️</p>
+    <div style="background:rgba(255,255,255,0.05);border-radius:16px;padding:18px;margin:12px 0;border:1px solid rgba(255,255,255,0.06)">
+      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.2em;color:#ffc94d;font-weight:700">Our Song</div>
+      <div style="font-family:'Baloo 2',system-ui,sans-serif;font-weight:800;font-size:1.1rem;color:#ffc94d;margin:2px 0">I Want It That Way</div>
+      <div style="font-size:0.8rem;opacity:0.5;margin-bottom:8px">Backstreet Boys</div>
+      <a class="btn-primary" href="https://www.youtube.com/results?search_query=Backstreet+Boys+I+Want+It+That+Way" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;padding:8px 18px">▶ Play it for me</a>
+    </div>
+    <p style="font-size:0.7rem;margin-top:10px;opacity:0.3">Made with love by Mohamed 🍉</p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" onerror="console.error('Three.js CDN failed to load')"></script>
+<script src="js/game-engine.js" onerror="console.error('game-engine.js failed to load')"></script>
+<script src="js/games/game-0-welcome.js" onerror="console.error('game-0 failed to load')"></script>
+<script src="js/games/game-1-findkey.js" onerror="console.error('game-1 failed to load')"></script>
+<script src="js/games/game-2-collect.js" onerror="console.error('game-2 failed to load')"></script>
+<script src="js/games/game-3-simon.js" onerror="console.error('game-3 failed to load')"></script>
+<script src="js/games/game-4-survive.js" onerror="console.error('game-4 failed to load')"></script>
+<script src="js/games/game-5-dodge.js" onerror="console.error('game-5 failed to load')"></script>
+<script src="js/games/game-6-rhythm.js" onerror="console.error('game-6 failed to load')"></script>
+<script src="js/games/game-7-boss.js" onerror="console.error('game-7 failed to load')"></script>
+<script>
+// ======================== INIT ========================
+try {
+  console.log('Starting init...');
+  document.getElementById('loading').textContent = 'Loading Three.js...';
+  if (typeof THREE === 'undefined') throw new Error('THREE is not defined - CDN may be blocked');
+  document.getElementById('loading').textContent = 'Building world...';
+  document.getElementById('enterBtn').addEventListener('click',()=>{
+    document.getElementById('startOverlay').classList.add('hidden');
+    document.getElementById('hud').style.display='flex';
+    S.entered=true;addOracleCrystal();updateHUD();
+    showNotification('🌅 Explore the museum! Each room has a challenge.','#ffc94d');
+    document.getElementById('pointerLockHint').style.display='flex';
+  });
+  document.getElementById('retryBtn').addEventListener('click',()=>{location.reload();});
+  document.getElementById('oracleAskBtn').addEventListener('click',askOracle);
+  document.getElementById('oracleCloseBtn').addEventListener('click',()=>{document.getElementById('oracleOverlay').classList.add('hidden');});
+  document.getElementById('oracleHudBtn').addEventListener('click',()=>{
+    if(S.entered&&!S.gameOver){document.getElementById('oracleOverlay').classList.remove('hidden');document.exitPointerLock();}
+  });
+  initEngine();
+  document.getElementById('loading').style.display = 'none';
+  console.log('Engine initialized successfully');
+} catch(e) {
+  console.error('Init error:', e);
+  document.getElementById('loading').textContent = 'Error: ' + e.message + ' — Check console (F12)';
+  document.getElementById('loading').style.color = '#ff6b7d';
+  document.getElementById('startOverlay').classList.remove('hidden');
+}
+</script>
+</body>
+</html>
