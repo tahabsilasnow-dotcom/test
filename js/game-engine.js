@@ -19,29 +19,29 @@ window.CFG = {
 // ======================== ROOM DEFINITIONS ========================
 window.ROOMS = [
   { id:'welcome', name:'🌅 Welcome Hall', x:3, z:0, desc:'Begin your journey',
-    floor:0x2a2040, wall:0x3a3050, ceil:0x1a1025, ambient:0x443366,
-    hemi:[0xffccaa,0x443366,0.4], lights:[{color:0xffaa66,pos:[3,4,0],int:0.7}] },
+    floor:0x4a3050, wall:0x5a4060, ceil:0x2a1030, ambient:0x774499,
+    hemi:[0xffddbb,0x774499,0.7], lights:[{color:0xffaa66,pos:[3,4,0],int:1.2},{color:0xcc88ff,pos:[1,3,1],int:0.8},{color:0xcc88ff,pos:[5,3,-1],int:0.8}] },
   { id:'gallery', name:'🖼️ Golden Gallery', x:10, z:0, desc:'Find the hidden golden key',
-    floor:0x3a2a1a, wall:0x4a3a2a, ceil:0x2a1a0a, ambient:0x443322,
-    hemi:[0xffddaa,0x443322,0.5], lights:[{color:0xffcc88,pos:[10,4,0],int:0.8}] },
+    floor:0x5a3a20, wall:0x6a4a30, ceil:0x3a1a0a, ambient:0x775533,
+    hemi:[0xffeebb,0x775533,0.8], lights:[{color:0xffcc88,pos:[10,4,0],int:1.5},{color:0xffaa44,pos:[8,3,1],int:0.7},{color:0xffaa44,pos:[12,3,-1],int:0.7}] },
   { id:'garden', name:'🌺 Moonlit Garden', x:17, z:0, desc:'Collect 5 glowing moonflowers',
-    floor:0x1a3a2a, wall:0x2a4a3a, ceil:0x0a2a1a, ambient:0x225544,
-    hemi:[0x88ddbb,0x225544,0.5], lights:[{color:0x66ffaa,pos:[17,4,0],int:0.6}] },
+    floor:0x1a4a3a, wall:0x2a5a4a, ceil:0x0a2a1a, ambient:0x338866,
+    hemi:[0x88ffcc,0x338866,0.8], lights:[{color:0x66ffaa,pos:[17,4,0],int:1.0},{color:0x44dd88,pos:[15,3,1],int:0.6},{color:0x44dd88,pos:[19,3,-1],int:0.6}] },
   { id:'library', name:'📚 Forgotten Library', x:24, z:0, desc:'Memorize the light sequence',
-    floor:0x2a1a10, wall:0x3a2a1a, ceil:0x1a0a05, ambient:0x332211,
-    hemi:[0xffaa66,0x332211,0.3], lights:[{color:0xff8844,pos:[24,4,0],int:0.5}] },
+    floor:0x3a2010, wall:0x4a3020, ceil:0x1a0a05, ambient:0x553322,
+    hemi:[0xffbb77,0x553322,0.5], lights:[{color:0xff8844,pos:[24,4,0],int:1.0},{color:0xffaa55,pos:[22,3,1],int:0.6},{color:0xcc7733,pos:[26,3,-1],int:0.5}] },
   { id:'basement', name:'💀 Shadow Basement', x:24, z:-10, desc:'Survive the monster ambush',
-    floor:0x111122, wall:0x222233, ceil:0x0a0a15, ambient:0x111122,
-    hemi:[0x884444,0x111122,0.2], lights:[{color:0xff2222,pos:[24,3,-10],int:0.3}] },
+    floor:0x1a0808, wall:0x2a1010, ceil:0x0a0404, ambient:0x331111,
+    hemi:[0x883333,0x331111,0.5], lights:[{color:0xff2222,pos:[24,3,-10],int:0.6},{color:0xcc1111,pos:[22,2,-8],int:0.4},{color:0xaa0000,pos:[26,2,-12],int:0.4}] },
   { id:'crystal', name:'💎 Crystal Cavern', x:17, z:-10, desc:'Dodge falling crystals 15s',
-    floor:0x1a1a3a, wall:0x2a2a4a, ceil:0x0a0a2a, ambient:0x334477,
-    hemi:[0xaabbff,0x334477,0.5], lights:[{color:0x8888ff,pos:[17,5,-10],int:0.8}] },
+    floor:0x1a1a4a, wall:0x2a2a5a, ceil:0x0a0a3a, ambient:0x4466aa,
+    hemi:[0xaabbff,0x4466aa,0.8], lights:[{color:0x8888ff,pos:[17,5,-10],int:1.2},{color:0x6666ff,pos:[15,3,-8],int:0.7},{color:0xaaaaff,pos:[19,4,-12],int:0.7}] },
   { id:'music', name:'🎵 Harmonic Hall', x:10, z:-10, desc:'Click in rhythm with the beat',
-    floor:0x2a1a3a, wall:0x3a2a4a, ceil:0x1a0a2a, ambient:0x552266,
-    hemi:[0xff88dd,0x552266,0.5], lights:[{color:0xff66dd,pos:[10,4,-10],int:0.7}] },
+    floor:0x3a1a4a, wall:0x4a2a5a, ceil:0x1a0a2a, ambient:0x773388,
+    hemi:[0xff88ee,0x773388,0.8], lights:[{color:0xff66dd,pos:[10,4,-10],int:1.2},{color:0xcc44bb,pos:[8,3,-8],int:0.7},{color:0xff88ff,pos:[12,3,-12],int:0.7}] },
   { id:'rooftop', name:'⚡ Storm Rooftop', x:3, z:-10, desc:'Defeat the final boss!',
-    floor:0x1a1a2e, wall:0x2a2a3e, ceil:0x0a0a1e, ambient:0x222244,
-    hemi:[0x6666aa,0x222244,0.3], lights:[{color:0x6666ff,pos:[3,5,-10],int:0.5}] }
+    floor:0x1a1a3e, wall:0x2a2a4e, ceil:0x0a0a2e, ambient:0x4444aa,
+    hemi:[0x8888ff,0x4444aa,0.6], lights:[{color:0x6666ff,pos:[3,5,-10],int:1.0},{color:0xaaaaff,pos:[1,4,-8],int:0.7},{color:0x4444ff,pos:[5,6,-12],int:0.8}] }
 ];
 
 // ======================== STATE ========================
@@ -51,10 +51,11 @@ window.S = {
   entered:false, gameOver:false,
   monstersKilled:0, keyCollected:false, bossAlive:false, bossHealth:150,
   finaleShown:false,
-  monsters:[], bullets:[], orbs:[], dodgeObstacles:[],
+  monsters:[], bullets:[], orbs:[], dodgeObstacles:[], particles:[],
   audioCtx:null, roomAmbience:null, oracleCooldown:0,
   oracleCrystal:null, oracleLight:null,
-  targetYaw:0, targetPitch:0
+  targetYaw:0, targetPitch:0,
+  shakeTimer:0, shakeOffset:{x:0,y:0}
 };
 
 // ======================== ROOM GAMES REGISTRY ========================
@@ -62,7 +63,7 @@ window.roomGames = {};
 
 // ======================== THREE.JS ========================
 let scene, camera, renderer, clock;
-window.player = {x:3, z:0};
+window.player = {x:3, y:1.6, z:0};
 let yaw = 0, pitch = 0;
 const pitchLimit = Math.PI / 2.3;
 const input = {fwd:false, back:false, left:false, right:false, sprint:false};
@@ -109,9 +110,10 @@ function buildSky() {
   canvas.width = 1; canvas.height = 256;
   const ctx = canvas.getContext('2d');
   const g = ctx.createLinearGradient(0,0,0,256);
-  g.addColorStop(0,'#0a0a1e'); g.addColorStop(0.3,'#1a1a3e');
-  g.addColorStop(0.5,'#2a2040'); g.addColorStop(0.7,'#3a2040');
-  g.addColorStop(0.85,'#4a3030'); g.addColorStop(1,'#5a4040');
+  g.addColorStop(0,'#0a0a2e'); g.addColorStop(0.2,'#1a1040');
+  g.addColorStop(0.4,'#3a1a3a'); g.addColorStop(0.55,'#6a2030');
+  g.addColorStop(0.7,'#8a3020'); g.addColorStop(0.85,'#b05030');
+  g.addColorStop(1,'#e08040');
   ctx.fillStyle = g; ctx.fillRect(0,0,1,256);
   const tex = new THREE.CanvasTexture(canvas); tex.needsUpdate = true;
   scene.add(new THREE.Mesh(skyGeo, new THREE.MeshBasicMaterial({map:tex, side:THREE.BackSide})));
@@ -150,7 +152,7 @@ function buildAllRooms() {
     if (!skipRight) addWallBox(0.2,4,7,r.x+3.5,2,r.z,wm);
     (()=>{const cm=new THREE.Mesh(new THREE.BoxGeometry(7,0.1,7),new THREE.MeshStandardMaterial({visible:false}));cm.position.set(r.x,4,r.z);scene.add(cm);})();
 
-    scene.add(new THREE.AmbientLight(r.ambient,0.3));
+    scene.add(new THREE.AmbientLight(r.ambient,0.6));
     scene.add(new THREE.HemisphereLight(r.hemi[0],r.hemi[1],r.hemi[2]));
     r.lights.forEach(l=>{const pl=new THREE.PointLight(l.color,l.int,12);pl.position.set(l.pos[0],l.pos[1],l.pos[2]);pl.castShadow=true;scene.add(pl);});
   });
@@ -161,21 +163,21 @@ function buildAllRooms() {
     if (Math.abs(a.z-b.z)>0.1) continue;
     const dist=Math.abs(b.x-a.x);
     if (dist<6.9||dist>8) continue;
-    const conn=new THREE.Mesh(new THREE.PlaneGeometry(dist-6,2),new THREE.MeshStandardMaterial({color:0x2a2040,roughness:0.8}));
+    const conn=new THREE.Mesh(new THREE.PlaneGeometry(dist-6,2),new THREE.MeshStandardMaterial({color:0x3a3050,roughness:0.8}));
     conn.rotation.x=-Math.PI/2; conn.position.set((a.x+b.x)/2,0.01,a.z); scene.add(conn);
   }
 
   // Stair corridor from room 3 (24,0) to room 4 (24,-10)
   for (let z=-0.5;z>=-9.5;z-=0.8) {
     const h=0.02+(Math.abs(z+0.5)/10)*0.2;
-    const step=new THREE.Mesh(new THREE.BoxGeometry(2.2,h,0.9),new THREE.MeshStandardMaterial({color:0x444466,roughness:0.5}));
+    const step=new THREE.Mesh(new THREE.BoxGeometry(2.2,h,0.9),new THREE.MeshStandardMaterial({color:0x3a1020,roughness:0.5}));
     step.position.set(24,h/2,z); scene.add(step);
   }
-  const sf=new THREE.Mesh(new THREE.PlaneGeometry(2.5,11),new THREE.MeshStandardMaterial({color:0x1a1a2e,roughness:0.9}));
+  const sf=new THREE.Mesh(new THREE.PlaneGeometry(2.5,11),new THREE.MeshStandardMaterial({color:0x1a0a1e,roughness:0.9}));
   sf.rotation.x=-Math.PI/2; sf.position.set(24,-0.05,-5); scene.add(sf);
-  addWallBox(0.2,4,11,22.8,2,-5,new THREE.MeshStandardMaterial({color:0x222238,roughness:0.8}));
-  addWallBox(0.2,4,11,25.2,2,-5,new THREE.MeshStandardMaterial({color:0x222238,roughness:0.8}));
-  addWallBox(2.5,4,0.2,24,2,-10.5,new THREE.MeshStandardMaterial({color:0x222238,roughness:0.8}));
+  addWallBox(0.2,4,11,22.8,2,-5,new THREE.MeshStandardMaterial({color:0x2a1040,roughness:0.8}));
+  addWallBox(0.2,4,11,25.2,2,-5,new THREE.MeshStandardMaterial({color:0x2a1040,roughness:0.8}));
+  addWallBox(2.5,4,0.2,24,2,-10.5,new THREE.MeshStandardMaterial({color:0x2a1040,roughness:0.8}));
 
   // Room decorations
   for (let i=0;i<ROOMS.length;i++) buildRoomDecor(ROOMS[i],i);
@@ -192,6 +194,15 @@ function buildRoomDecor(r, idx) {
   if (window.roomGames[idx] && window.roomGames[idx].build) {
     window.roomGames[idx].build(r, idx);
   }
+}
+
+// ======================== HIT MARKER ========================
+function showHitMarker() {
+  const el = document.createElement('div');
+  el.textContent = '✚';
+  el.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-size:30px;color:red;font-weight:bold;pointer-events:none;z-index:999;text-shadow:0 0 5px rgba(255,0,0,0.5);opacity:0.9;';
+  document.body.appendChild(el);
+  setTimeout(() => { if(el.parentNode) el.parentNode.removeChild(el); }, 200);
 }
 
 // ======================== PLAYER ========================
@@ -211,7 +222,15 @@ function updatePlayer(dt) {
   let blocked=false;
   for (const w of wallBoxes) if (box.intersectsBox(w)){blocked=true;break;}
   if (!blocked){player.x=nx;player.z=nz;}
-  camera.position.set(player.x,CFG.height,player.z);
+  player.y = CFG.height;
+  camera.position.set(player.x, CFG.height, player.z);
+  // Screen shake
+  if(S.shakeTimer > 0) {
+    S.shakeTimer -= dt;
+    camera.position.x += S.shakeOffset.x;
+    camera.position.y += S.shakeOffset.y;
+    if(S.shakeTimer <= 0) { S.shakeOffset.x = 0; S.shakeOffset.y = 0; }
+  }
   // Smooth camera toward target using frame-rate-independent lerp
   const smoothFactor = 1 - Math.exp(-CFG.mouseSmooth * dt);
   yaw += (S.targetYaw - yaw) * smoothFactor;
@@ -287,14 +306,21 @@ function shoot() {
   if(S.weapon==='shotgun')S.ammo--;
   updateHUD();
 
-  // Let room game handle click
+  // Let room game handle click — returns true ONLY if it consumed the click
   if(window.roomGames[S.currentRoom]&&window.roomGames[S.currentRoom].click){
-    if(window.roomGames[S.currentRoom].click()) return;
+    const consumed = window.roomGames[S.currentRoom].click();
+    if(consumed === true) return;
   }
 
-  const flash=new THREE.PointLight(0xffaa66,1.5,4);
+  // Muzzle flash
+  const flash=new THREE.PointLight(0xffaa66,2,4);
   flash.position.set(camera.position.x+Math.sin(yaw)*0.5,camera.position.y-0.2,camera.position.z+Math.cos(yaw)*0.5);
-  scene.add(flash); setTimeout(()=>scene.remove(flash),60);
+  scene.add(flash); setTimeout(()=>scene.remove(flash),80);
+
+  // Screen shake
+  S.shakeTimer = 0.1;
+  S.shakeOffset.x = (Math.random() - 0.5) * 0.05;
+  S.shakeOffset.y = (Math.random() - 0.5) * 0.05;
 
   for(let p=0;p<pellets;p++){
     const spread=S.weapon==='shotgun'?0.05:0.003;
@@ -315,13 +341,28 @@ function shoot() {
 
 window.damageMonster = function(m,dmg) {
   if(!m.alive)return;
+  showHitMarker();
   m.health-=dmg;m.hitFlash=0.15;m.mesh.material.color.setHex(0xffffff);
+  // Recoil: stop and move backward
+  const dx = m.x - player.x, dz = m.z - player.z;
+  const recoilDist = Math.hypot(dx, dz);
+  if(recoilDist > 0.1) { m.recoilDir = {x: dx/recoilDist, z: dz/recoilDist}; }
+  else { m.recoilDir = {x: 0, z: 0}; }
+  m.recoilTimer = 0.2;
+  // Boss stage check
+  if(m.isBoss && m.health <= 75 && m.health > 0 && !m.stage2) {
+    m.stage2 = true;
+    m.speed *= 2;
+  }
   if(m.health<=0){
     m.alive=false;scene.remove(m.mesh);
-    for(let i=0;i<10;i++){
-      const p=new THREE.Mesh(new THREE.SphereGeometry(0.04,4,4),new THREE.MeshBasicMaterial({color:m.isBoss?0xff4444:0xff6b7d}));
+    if(m.isBoss && m.glowLight) { scene.remove(m.glowLight); m.glowLight = null; }
+    const colors = [0xff4444,0xff6b7d,0xffaa44,0xffcc44,0xff8844,0xff6622];
+    for(let i=0;i<15;i++){
+      const color=colors[Math.floor(Math.random()*colors.length)];
+      const p=new THREE.Mesh(new THREE.SphereGeometry(0.04,4,4),new THREE.MeshBasicMaterial({color}));
       p.position.copy(m.mesh.position);p.position.x+=(Math.random()-0.5)*0.5;p.position.z+=(Math.random()-0.5)*0.5;p.position.y=0.5+Math.random()*0.5;
-      scene.add(p);S.bullets.push({mesh:p,vel:{x:(Math.random()-0.5)*3,y:2+Math.random()*2,z:(Math.random()-0.5)*3},life:1,type:'particle'});
+      scene.add(p);S.particles.push({mesh:p,vel:{x:(Math.random()-0.5)*3,y:2+Math.random()*2,z:(Math.random()-0.5)*3},life:1});
     }
     if(m.isBoss){S.bossAlive=false;document.getElementById('bossBar').style.display='none';completeRoomGame(7);}
     else{S.monstersKilled++;updateHUD();}
@@ -330,7 +371,8 @@ window.damageMonster = function(m,dmg) {
 
 // ======================== MONSTERS ========================
 window.spawnMonster = function(x,z,isBoss) {
-  const m={x,z,health:isBoss?150:30,speed:0.8+Math.random()*0.4,alive:true,isBoss:isBoss||false,attackCD:0,hitFlash:0,mesh:null};
+  const m={x,z,health:isBoss?150:30,speed:0.8+Math.random()*0.4,alive:true,isBoss:isBoss||false,attackCD:0,hitFlash:0,mesh:null,
+    strafeOffset:Math.random()*Math.PI*2,moveDelay:Math.random()*1.0,recoilTimer:0,recoilDir:{x:0,z:0},chargeTimer:isBoss?0:0,charging:0,stage2:false,glowLight:null};
   const canvas=document.createElement('canvas');canvas.width=96;canvas.height=96;
   const ctx=canvas.getContext('2d');
   ctx.fillStyle=isBoss?'#4a0000':'#1a0000';ctx.fillRect(0,0,96,96);
@@ -346,7 +388,10 @@ window.spawnMonster = function(x,z,isBoss) {
   const sprite=new THREE.Sprite(mat);sprite.scale.set(isBoss?2:1,isBoss?2:1,1);
   sprite.position.set(x,isBoss?1.6:1,z);scene.add(sprite);
   m.mesh=sprite;S.monsters.push(m);
-  if(isBoss){S.bossAlive=true;S.bossHealth=150;document.getElementById('bossBar').style.display='flex';}
+  if(isBoss){
+    S.bossAlive=true;S.bossHealth=150;document.getElementById('bossBar').style.display='flex';
+    m.glowLight=new THREE.PointLight(0xff2222,0.8,5);m.glowLight.position.set(x,1.6,z);scene.add(m.glowLight);
+  }
   return m;
 };
 
@@ -501,21 +546,91 @@ function animate() {
 
   S.monsters.forEach(m=>{
     if(!m.alive||S.gameOver)return;
+
+    // Staggered start delay
+    if(m.moveDelay > 0) {
+      m.moveDelay -= dt;
+      // Still update hitFlash and attackCD during delay
+      if(m.hitFlash>0){m.hitFlash-=dt;m.mesh.material.color.setHex(m.hitFlash>0?0xffffff:(m.isBoss?0x4a0000:0x1a0000));}
+      if(m.attackCD>0)m.attackCD-=dt;
+      if(m.isBoss&&m.glowLight){const ps=(m.stage2||m.health<=75)?8:3;m.glowLight.intensity=0.5+Math.sin(performance.now()*0.001*ps)*0.5;}
+      return;
+    }
+
+    // Recoil: move backward, skip normal pursuit
+    if(m.recoilTimer > 0) {
+      m.recoilTimer -= dt;
+      m.x += m.recoilDir.x * m.speed * dt * 2;
+      m.z += m.recoilDir.z * m.speed * dt * 2;
+      const rr=ROOMS[S.currentRoom];
+      if(Math.abs(m.x-rr.x)>2.5)m.x=rr.x+Math.sign(m.x-rr.x)*2.5;
+      if(Math.abs(m.z-rr.z)>2.5)m.z=rr.z+Math.sign(m.z-rr.z)*2.5;
+      m.mesh.position.set(m.x,m.isBoss?1.6:1,m.z);
+      if(m.hitFlash>0){m.hitFlash-=dt;m.mesh.material.color.setHex(m.hitFlash>0?0xffffff:(m.isBoss?0x4a0000:0x1a0000));}
+      if(m.attackCD>0)m.attackCD-=dt;
+      if(m.isBoss&&m.glowLight){const ps=(m.stage2||m.health<=75)?8:3;m.glowLight.intensity=0.5+Math.sin(performance.now()*0.001*ps)*0.5;}
+      return;
+    }
+
     const dx=player.x-m.x,dz=player.z-m.z,dist=Math.hypot(dx,dz);
-    if(dist>0.3){m.x+=(dx/dist)*m.speed*dt;m.z+=(dz/dist)*m.speed*dt;}
+
+    // Boss charge
+    let currentSpeed = m.speed;
+    if(m.isBoss) {
+      m.chargeTimer -= dt;
+      if(m.chargeTimer <= 0) {
+        m.chargeTimer = 3;
+        m.charging = 0.5;
+      }
+      if(m.charging > 0) {
+        m.charging -= dt;
+        currentSpeed = m.speed * 3;
+      }
+    }
+
+    if(dist>0.3){
+      if(m.isBoss) {
+        m.x += (dx/dist)*currentSpeed*dt;
+        m.z += (dz/dist)*currentSpeed*dt;
+      } else {
+        // Strafing movement
+        const strafe = Math.cos(m.strafeOffset + performance.now() * 0.002) * 0.3;
+        m.x += (dx/dist)*m.speed*dt + (-dz/dist)*m.speed*strafe*dt;
+        m.z += (dz/dist)*m.speed*dt + (dx/dist)*m.speed*strafe*dt;
+      }
+    }
+
     const r=ROOMS[S.currentRoom];
     if(Math.abs(m.x-r.x)>2.5)m.x=r.x+Math.sign(m.x-r.x)*2.5;
     if(Math.abs(m.z-r.z)>2.5)m.z=r.z+Math.sign(m.z-r.z)*2.5;
     m.mesh.position.set(m.x,m.isBoss?1.6:1,m.z);
+
     if(m.hitFlash>0){m.hitFlash-=dt;m.mesh.material.color.setHex(m.hitFlash>0?0xffffff:(m.isBoss?0x4a0000:0x1a0000));}
-    if(dist<1.2&&m.attackCD<=0){S.health-=m.isBoss?15:10;m.attackCD=1;updateHUD();if(S.health<=0)gameOver();}
+
+    if(dist<1.2&&m.attackCD<=0){
+      S.health-=m.isBoss?15:10;
+      m.attackCD=m.isBoss?((m.stage2||m.health<=75)?0.5:1):1;
+      updateHUD();if(S.health<=0)gameOver();
+    }
     if(m.attackCD>0)m.attackCD-=dt;
+
+    // Boss glow pulse — faster when low HP
+    if(m.isBoss&&m.glowLight){
+      const ps=(m.stage2||m.health<=75)?8:3;
+      m.glowLight.intensity=0.5+Math.sin(performance.now()*0.001*ps)*0.5;
+    }
   });
 
   for(let i=S.bullets.length-1;i>=0;i--){
     const p=S.bullets[i];if(p.type!=='particle')continue;
     p.mesh.position.x+=p.vel.x*dt;p.mesh.position.y+=p.vel.y*dt;p.mesh.position.z+=p.vel.z*dt;
     p.vel.y-=5*dt;p.life-=dt;if(p.life<=0){scene.remove(p.mesh);S.bullets.splice(i,1);}
+  }
+
+  for(let i=S.particles.length-1;i>=0;i--){
+    const p=S.particles[i];
+    p.mesh.position.x+=p.vel.x*dt;p.mesh.position.y+=p.vel.y*dt;p.mesh.position.z+=p.vel.z*dt;
+    p.vel.y-=5*dt;p.life-=dt;if(p.life<=0){scene.remove(p.mesh);S.particles.splice(i,1);}
   }
 
   if(S.oracleCrystal){S.oracleCrystal.rotation.y+=dt*0.5;if(S.oracleLight)S.oracleLight.intensity=0.5+Math.sin(performance.now()*0.003)*0.25;}
