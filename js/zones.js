@@ -271,6 +271,7 @@ window.updateZones = function(dt) {
   playerCurrentZone = newZone;
 
   // Update fragment visibility and bobbing
+  var nearFragment = false;
   fragmentMeshes.forEach(function(fm) {
     if (fm.collected) return;
     var zone = ZONES[fm.zone];
@@ -285,8 +286,16 @@ window.updateZones = function(dt) {
       fm.group.position.y = zh + Math.sin(performance.now() * 0.002) * 0.08;
       fm.group.rotation.y += dt * 0.5;
       if (fm.orbitRing) fm.orbitRing.rotation.z += dt * 0.8;
+      if (d < 2.5) nearFragment = true;
     }
   });
+
+  var hint = document.getElementById('interactHint');
+  if (nearFragment && !W.state.dialogueActive) {
+    hint.classList.add('show');
+  } else {
+    hint.classList.remove('show');
+  }
 };
 
 function enterZone(idx) {

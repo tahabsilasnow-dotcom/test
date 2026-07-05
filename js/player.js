@@ -203,10 +203,10 @@ function updateCharacter(dt, dx, dz) {
   if (moving) {
     var swing = Math.sin(animTime * 2.5) * 0.2;
     characterGroup.children.forEach(function(child, idx) {
-      if (idx === 8) child.position.x = -0.1 + swing;
-      if (idx === 9) child.position.x = 0.1 - swing;
-      if (idx === 10) child.position.x = -0.1 + swing;
-      if (idx === 11) child.position.x = 0.1 - swing;
+      if (idx === 5) child.position.x = -0.1 + swing;
+      if (idx === 6) child.position.x = 0.1 - swing;
+      if (idx === 7) child.position.x = -0.1 + swing;
+      if (idx === 8) child.position.x = 0.1 - swing;
     });
   }
 }

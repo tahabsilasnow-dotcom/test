@@ -1,23 +1,11 @@
 (function() {
 
-window.World = {
-  scene: null, camera: null, renderer: null, clock: null,
-  state: {
-    started: false, fragments: 0, totalFragments: 3,
-    currentZone: -1, zonesDone: [false, false, false],
-    finaleShown: false, dialogueActive: false,
-    collected: [], obstacles: [], particles: []
-  },
-  playerPos: new THREE.Vector3(0, 0, -25),
-  playerRot: 0,
-  keys: { fwd: false, back: false, left: false, right: false, sprint: false, jump: false },
-  mouseDown: false, mouseDX: 0, mouseDY: 0
-};
-
 var W = window.World;
 
 window.initGame = function() {
   var container = document.getElementById('game-container');
+
+  W.playerPos = new THREE.Vector3(0, 0, -25);
 
   W.scene = new THREE.Scene();
   W.scene.fog = new THREE.Fog(0x1a1040, 30, 70);
@@ -251,8 +239,5 @@ function launchConfetti() {
   }
   draw();
 }
-
-var ld = document.getElementById('loading');
-if (ld) ld.style.display = 'none';
 
 })();
