@@ -24,10 +24,10 @@
   #crosshair .dot{position:absolute;width:4px;height:4px;background:#ff6b7d;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 8px #ff6b7d}
   #hud{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:10;display:none;align-items:center;gap:10px;padding:8px 16px;background:rgba(10,10,20,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(138,75,255,.25);border-radius:12px;font-size:13px;white-space:nowrap}
   #hud .hud-pill{display:flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(138,75,255,.12);border:1px solid rgba(138,75,255,.2);border-radius:8px}
-  #hud #healthDisplay{color:#ff6b7d;font-weight:700;min-width:36px}
-  #hud #weaponDisplay{color:#e0e0e0;min-width:60px}
+  #hud #hpText{color:#ff6b7d;font-weight:700;min-width:36px}
+  #hud #weapDisplay{color:#e0e0e0;min-width:60px}
   #hud #ammoDisplay{color:#ff6b7d;font-weight:700;min-width:40px}
-  #hud #roomDisplay{color:#8a4bff;min-width:80px}
+  #hud #roomName{color:#8a4bff;min-width:80px}
   #hud #oracleHudBtn{background:linear-gradient(135deg,#8a4bff,#ff6b7d);border:none;color:#fff;padding:4px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:.5px;transition:all .2s}
   #hud #oracleHudBtn:hover{transform:scale(1.05);box-shadow:0 0 16px rgba(138,75,255,.5)}
   #notif{position:fixed;top:80px;left:50%;transform:translateX(-50%);z-index:15;padding:10px 24px;background:rgba(10,10,20,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(138,75,255,.3);border-radius:10px;font-size:14px;opacity:0;transition:all .4s;pointer-events:none;color:#e0e0e0;text-align:center}
@@ -111,10 +111,10 @@
 </div>
 
 <div id="hud">
-  <div class="hud-pill"><span>❤️</span><span id="healthDisplay">100</span></div>
-  <div class="hud-pill"><span id="weaponDisplay">🔫 Fists</span></div>
+  <div class="hud-pill"><span>❤️</span><span id="hpText">100</span><div style="width:60px;height:6px;background:rgba(255,255,255,.1);border-radius:3px;margin-left:6px;overflow:hidden"><div id="hpFill" style="height:100%;width:100%;background:linear-gradient(90deg,#ff6b7d,#ff2d55);border-radius:3px;transition:width .3s"></div></div></div>
+  <div class="hud-pill"><span id="weapDisplay">🔫 Pistol</span></div>
   <div class="hud-pill"><span id="ammoDisplay">∞</span></div>
-  <div class="hud-pill"><span id="roomDisplay">🏛️ Lobby</span></div>
+  <div class="hud-pill"><span id="roomName">🏛️ Lobby</span></div>
   <button id="oracleHudBtn">✦ Oracle</button>
 </div>
 
@@ -141,10 +141,11 @@
   </div>
 </div>
 
+
 <div id="roomComplete">
-  <div class="emoji">🎉</div>
-  <div class="label">Room Complete</div>
-  <div class="desc">You cleared this memory</div>
+  <div class="emoji" id="rcEmoji">🎉</div>
+  <div class="label" id="rcLabel">Room Complete</div>
+  <div class="desc" id="rcDesc">You cleared this memory</div>
 </div>
 
 <div id="pointerLockHint">
@@ -154,7 +155,7 @@
     <span><span class="k">Mouse</span> Look</span>
     <span><span class="k">E</span> Interact</span>
     <span><span class="k">Shift</span> Sprint</span>
-    <span><span class="k">Space</span> Jump</span>
+
     <span><span class="k">Esc</span> Pause</span>
   </div>
 </div>
@@ -164,7 +165,7 @@
   <h1>MUSEUM OF MEMORIES</h1>
   <div class="subtitle">A Birthday Quest for Houda</div>
   <div class="info-cards">
-    <div class="card"><strong>8</strong> Rooms to explore</div>
+    <div class="card"><strong>5</strong> Rooms to explore</div>
     <div class="card"><strong>🔫</strong> Combat awaits</div>
     <div class="card"><strong>🧠</strong> Puzzles to solve</div>
     <div class="card"><strong>🎵</strong> Finale surprise</div>
@@ -214,15 +215,13 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/ai-game-master.js"></script>
 <script src="js/game-engine.js"></script>
-<script src="js/games/game-0-welcome.js"></script>
-<script src="js/games/game-1-findkey.js"></script>
-<script src="js/games/game-2-collect.js"></script>
-<script src="js/games/game-3-simon.js"></script>
-<script src="js/games/game-4-survive.js"></script>
-<script src="js/games/game-5-dodge.js"></script>
-<script src="js/games/game-6-rhythm.js"></script>
-<script src="js/games/game-7-boss.js"></script>
+<script src="js/games/room-shooting.js"></script>
+<script src="js/games/room-searching.js"></script>
+<script src="js/games/room-fighting.js"></script>
+<script src="js/games/room-running.js"></script>
+<script src="js/games/room-cooking.js"></script>
 <script>
 document.getElementById('enterBtn').addEventListener('click',function(){
   document.getElementById('startOverlay').classList.add('hidden');

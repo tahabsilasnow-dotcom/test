@@ -18,36 +18,37 @@ window.CFG = {
 
 // ======================== ROOM DEFINITIONS ========================
 window.ROOMS = [
-  { id:'welcome', name:'🌅 Welcome Hall', x:3, z:0, desc:'Begin your journey',
-    floor:0x4a3050, wall:0x5a4060, ceil:0x2a1030, ambient:0x774499,
-    hemi:[0xffddbb,0x774499,0.7], lights:[{color:0xffaa66,pos:[3,4,0],int:1.2},{color:0xcc88ff,pos:[1,3,1],int:0.8},{color:0xcc88ff,pos:[5,3,-1],int:0.8}] },
-  { id:'gallery', name:'🖼️ Golden Gallery', x:10, z:0, desc:'Find the hidden golden key',
-    floor:0x5a3a20, wall:0x6a4a30, ceil:0x3a1a0a, ambient:0x775533,
-    hemi:[0xffeebb,0x775533,0.8], lights:[{color:0xffcc88,pos:[10,4,0],int:1.5},{color:0xffaa44,pos:[8,3,1],int:0.7},{color:0xffaa44,pos:[12,3,-1],int:0.7}] },
-  { id:'garden', name:'🌺 Moonlit Garden', x:17, z:0, desc:'Collect 5 glowing moonflowers',
-    floor:0x1a4a3a, wall:0x2a5a4a, ceil:0x0a2a1a, ambient:0x338866,
-    hemi:[0x88ffcc,0x338866,0.8], lights:[{color:0x66ffaa,pos:[17,4,0],int:1.0},{color:0x44dd88,pos:[15,3,1],int:0.6},{color:0x44dd88,pos:[19,3,-1],int:0.6}] },
-  { id:'library', name:'📚 Forgotten Library', x:24, z:0, desc:'Memorize the light sequence',
-    floor:0x3a2010, wall:0x4a3020, ceil:0x1a0a05, ambient:0x553322,
-    hemi:[0xffbb77,0x553322,0.5], lights:[{color:0xff8844,pos:[24,4,0],int:1.0},{color:0xffaa55,pos:[22,3,1],int:0.6},{color:0xcc7733,pos:[26,3,-1],int:0.5}] },
-  { id:'basement', name:'💀 Shadow Basement', x:24, z:-10, desc:'Survive the monster ambush',
-    floor:0x1a0808, wall:0x2a1010, ceil:0x0a0404, ambient:0x331111,
-    hemi:[0x883333,0x331111,0.5], lights:[{color:0xff2222,pos:[24,3,-10],int:0.6},{color:0xcc1111,pos:[22,2,-8],int:0.4},{color:0xaa0000,pos:[26,2,-12],int:0.4}] },
-  { id:'crystal', name:'💎 Crystal Cavern', x:17, z:-10, desc:'Dodge falling crystals 15s',
-    floor:0x1a1a4a, wall:0x2a2a5a, ceil:0x0a0a3a, ambient:0x4466aa,
-    hemi:[0xaabbff,0x4466aa,0.8], lights:[{color:0x8888ff,pos:[17,5,-10],int:1.2},{color:0x6666ff,pos:[15,3,-8],int:0.7},{color:0xaaaaff,pos:[19,4,-12],int:0.7}] },
-  { id:'music', name:'🎵 Harmonic Hall', x:10, z:-10, desc:'Click in rhythm with the beat',
-    floor:0x3a1a4a, wall:0x4a2a5a, ceil:0x1a0a2a, ambient:0x773388,
-    hemi:[0xff88ee,0x773388,0.8], lights:[{color:0xff66dd,pos:[10,4,-10],int:1.2},{color:0xcc44bb,pos:[8,3,-8],int:0.7},{color:0xff88ff,pos:[12,3,-12],int:0.7}] },
-  { id:'rooftop', name:'⚡ Storm Rooftop', x:3, z:-10, desc:'Defeat the final boss!',
-    floor:0x1a1a3e, wall:0x2a2a4e, ceil:0x0a0a2e, ambient:0x4444aa,
-    hemi:[0x8888ff,0x4444aa,0.6], lights:[{color:0x6666ff,pos:[3,5,-10],int:1.0},{color:0xaaaaff,pos:[1,4,-8],int:0.7},{color:0x4444ff,pos:[5,6,-12],int:0.8}] }
+  { id:'shooting', name:'🎯 Shooting Range', x:3, z:0, desc:'Hit all targets!',
+    floor:0x2a1a3e, wall:0x3a2a4e, ceil:0x1a0a2e, ambient:0x5533aa,
+    hemi:[0xff8866,0x5533aa,0.8], lights:[
+      {color:0xff6644,pos:[3,4,0],int:1.5},{color:0xcc44ff,pos:[1,3,1.5],int:1.0},{color:0xffaa44,pos:[5,3,-1.5],int:0.8}
+    ]},
+  { id:'searching', name:'🔦 Dark Vault', x:10, z:0, desc:'Find the hidden keys',
+    floor:0x1a1a2e, wall:0x2a2a3e, ceil:0x0a0a1e, ambient:0x334488,
+    hemi:[0x88aaff,0x334488,0.6], lights:[
+      {color:0x4488ff,pos:[10,4,0],int:1.2},{color:0x66aaff,pos:[8,3,1.5],int:0.8},{color:0x2266cc,pos:[12,3,-1.5],int:0.7}
+    ]},
+  { id:'fighting', name:'⚡ Laser Arena', x:17, z:0, desc:'Dodge the lasers!',
+    floor:0x2a1a1e, wall:0x3a2a2e, ceil:0x1a0a0e, ambient:0x883344,
+    hemi:[0xff6688,0x883344,0.7], lights:[
+      {color:0xff2266,pos:[17,4,0],int:1.5},{color:0xff8844,pos:[15,3,1.5],int:1.0},{color:0xcc44ff,pos:[19,3,-1.5],int:0.9}
+    ]},
+  { id:'running', name:'🏃 Speed Corridor', x:24, z:0, desc:'Race through!',
+    floor:0x1a2a1e, wall:0x2a3a2e, ceil:0x0a1a0e, ambient:0x338844,
+    hemi:[0x88ff88,0x338844,0.7], lights:[
+      {color:0x44ff88,pos:[24,4,0],int:1.5},{color:0x66ffaa,pos:[22,3,1.5],int:1.0},{color:0x22cc66,pos:[26,3,-1.5],int:0.8}
+    ]},
+  { id:'cooking', name:'🍳 Kitchen Stadium', x:31, z:0, desc:'Cook the perfect dish!',
+    floor:0x2a2a1e, wall:0x3a3a2e, ceil:0x1a1a0e, ambient:0x886644,
+    hemi:[0xffcc66,0x886644,0.8], lights:[
+      {color:0xffaa44,pos:[31,4,0],int:1.5},{color:0xff6644,pos:[29,3,1.5],int:1.0},{color:0xffdd66,pos:[33,3,-1.5],int:0.8}
+    ]}
 ];
 
 // ======================== STATE ========================
 window.S = {
   health: CFG.health, weapon:'pistol', hasShotgun:false, ammo:Infinity,
-  currentRoom:0, roomsDone:[false,false,false,false,false,false,false,false],
+  currentRoom:0, roomsDone:[false,false,false,false,false],
   entered:false, gameOver:false,
   monstersKilled:0, keyCollected:false, bossAlive:false, bossHealth:150,
   finaleShown:false,
@@ -74,6 +75,7 @@ const wallBoxes = [];
 window.initEngine = function() {
   const container = document.getElementById('game-container');
   scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x0a0a1e, 0.015);
   camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 100);
   camera.position.set(player.x, CFG.height, player.z);
   renderer = new THREE.WebGLRenderer({antialias:true, powerPreference:'high-performance'});
@@ -82,13 +84,17 @@ window.initEngine = function() {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.2;
+  renderer.toneMappingExposure = 1.5;
   container.appendChild(renderer.domElement);
   clock = new THREE.Clock();
   camera.rotation.order = 'YXZ';
 
+  if(typeof GM !== 'undefined' && GM.newRun) GM.newRun();
+
   buildSky();
   buildAllRooms();
+
+  createCompanionHud();
 
   window.addEventListener('resize', ()=>{
     camera.aspect = window.innerWidth/window.innerHeight;
@@ -103,34 +109,71 @@ window.initEngine = function() {
   animate();
 };
 
+// ======================== COMPANION HUD ========================
+function createCompanionHud() {
+  const el = document.createElement('div');
+  el.id = 'companionHud';
+  el.innerHTML = '<div id="companionPersonality"></div><div id="companionText"></div>';
+  el.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-20px);z-index:12;text-align:center;pointer-events:none;opacity:0;transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);max-width:500px;';
+  document.body.appendChild(el);
+  const pEl = document.getElementById('companionPersonality');
+  if(pEl) pEl.style.cssText = 'color:#8a4bff;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:4px;text-shadow:0 0 12px rgba(138,75,255,0.3);';
+  const tEl = document.getElementById('companionText');
+  if(tEl) tEl.style.cssText = 'color:#e0e0e0;font-size:15px;padding:10px 20px;background:rgba(10,10,20,0.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(138,75,255,0.25);border-radius:12px;display:inline-block;text-shadow:0 2px 8px rgba(0,0,0,0.5);';
+}
+
+window.showCompanionDialog = function(context) {
+  const el = document.getElementById('companionHud');
+  const pEl = document.getElementById('companionPersonality');
+  const tEl = document.getElementById('companionText');
+  if(!el || !tEl || typeof GM === 'undefined') return;
+  var text = GM.getDialog(context);
+  tEl.textContent = text;
+  if(pEl) pEl.textContent = '✦ ' + GM.personality.charAt(0).toUpperCase() + GM.personality.slice(1);
+  el.style.opacity = '1';
+  el.style.transform = 'translateX(-50%) translateY(0)';
+  clearTimeout(el._hideTimeout);
+  el._hideTimeout = setTimeout(function() {
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(-50%) translateY(-20px)';
+  }, 5000);
+};
+
 // ======================== SKY ========================
 function buildSky() {
-  const skyGeo = new THREE.SphereGeometry(80, 32, 32);
+  const skyGeo = new THREE.SphereGeometry(80, 48, 48);
   const canvas = document.createElement('canvas');
   canvas.width = 1; canvas.height = 256;
   const ctx = canvas.getContext('2d');
   const g = ctx.createLinearGradient(0,0,0,256);
-  g.addColorStop(0,'#0a0a2e'); g.addColorStop(0.2,'#1a1040');
-  g.addColorStop(0.4,'#3a1a3a'); g.addColorStop(0.55,'#6a2030');
-  g.addColorStop(0.7,'#8a3020'); g.addColorStop(0.85,'#b05030');
-  g.addColorStop(1,'#e08040');
+  g.addColorStop(0,'#05051a'); g.addColorStop(0.15,'#0a0a2e');
+  g.addColorStop(0.3,'#1a1040'); g.addColorStop(0.45,'#2a1550');
+  g.addColorStop(0.6,'#1a0a3a'); g.addColorStop(0.75,'#0f0a2a');
+  g.addColorStop(0.85,'#0a051e'); g.addColorStop(1,'#1a0a2a');
   ctx.fillStyle = g; ctx.fillRect(0,0,1,256);
+  for(let i=0;i<60;i++){ctx.fillStyle='rgba(255,255,255,'+(Math.random()*0.08+0.02)+')';ctx.beginPath();ctx.arc(Math.random()*1,Math.random()*180,Math.random()*0.008+0.001,0,Math.PI*2);ctx.fill();}
   const tex = new THREE.CanvasTexture(canvas); tex.needsUpdate = true;
   scene.add(new THREE.Mesh(skyGeo, new THREE.MeshBasicMaterial({map:tex, side:THREE.BackSide})));
 
   // Stars
-  const sc = 1500, g2 = new THREE.BufferGeometry(), p = new Float32Array(sc*3);
+  const sc = 2000, g2 = new THREE.BufferGeometry(), p = new Float32Array(sc*3);
+  const sizes = new Float32Array(sc);
   for (let i=0; i<sc; i++) {
     const theta = Math.random()*Math.PI*2, phi = Math.acos(Math.random()*0.6+0.2), r = 70+Math.random()*10;
     p[i*3]=r*Math.sin(phi)*Math.cos(theta); p[i*3+1]=r*Math.cos(phi); p[i*3+2]=r*Math.sin(phi)*Math.sin(theta);
+    sizes[i]=0.04+Math.random()*0.12;
   }
   g2.setAttribute('position', new THREE.BufferAttribute(p,3));
-  scene.add(new THREE.Points(g2, new THREE.PointsMaterial({color:0xffffff,size:0.08,transparent:true,opacity:0.7,sizeAttenuation:true})));
+  g2.setAttribute('size', new THREE.BufferAttribute(sizes,1));
+  scene.add(new THREE.Points(g2, new THREE.PointsMaterial({color:0xffffff,size:0.1,transparent:true,opacity:0.8,sizeAttenuation:true})));
 
   // Moon
-  const moon = new THREE.Mesh(new THREE.SphereGeometry(1.5,24,24), new THREE.MeshStandardMaterial({color:0xffeedd,emissive:0xffddaa,emissiveIntensity:0.1,roughness:0.3}));
-  moon.position.set(20,25,-30); scene.add(moon);
-  const moonGlow = new THREE.PointLight(0xffeedd,0.2,40); moonGlow.position.copy(moon.position); scene.add(moonGlow);
+  const moonMat = new THREE.MeshStandardMaterial({color:0xffeecc,emissive:0xffddaa,emissiveIntensity:0.15,roughness:0.2,metalness:0.05});
+  const moon = new THREE.Mesh(new THREE.SphereGeometry(1.8,32,32), moonMat);
+  moon.position.set(20,28,-35); scene.add(moon);
+  const moonGlow = new THREE.PointLight(0xffeedd,0.4,50); moonGlow.position.copy(moon.position); scene.add(moonGlow);
+  const moonHalo = new THREE.Mesh(new THREE.SphereGeometry(2.6,24,24), new THREE.MeshBasicMaterial({color:0xffeecc,transparent:true,opacity:0.06,side:THREE.BackSide}));
+  moonHalo.position.copy(moon.position); scene.add(moonHalo);
 }
 
 // ======================== ROOM BUILDER ========================
@@ -157,7 +200,7 @@ function buildAllRooms() {
     r.lights.forEach(l=>{const pl=new THREE.PointLight(l.color,l.int,12);pl.position.set(l.pos[0],l.pos[1],l.pos[2]);pl.castShadow=true;scene.add(pl);});
   });
 
-  // Connector floors between adjacent rooms on same row
+  // Connector floors between adjacent rooms
   for (let i=0;i<ROOMS.length;i++) for (let j=i+1;j<ROOMS.length;j++) {
     const a=ROOMS[i],b=ROOMS[j];
     if (Math.abs(a.z-b.z)>0.1) continue;
@@ -166,18 +209,6 @@ function buildAllRooms() {
     const conn=new THREE.Mesh(new THREE.PlaneGeometry(dist-6,2),new THREE.MeshStandardMaterial({color:0x3a3050,roughness:0.8}));
     conn.rotation.x=-Math.PI/2; conn.position.set((a.x+b.x)/2,0.01,a.z); scene.add(conn);
   }
-
-  // Stair corridor from room 3 (24,0) to room 4 (24,-10)
-  for (let z=-0.5;z>=-9.5;z-=0.8) {
-    const h=0.02+(Math.abs(z+0.5)/10)*0.2;
-    const step=new THREE.Mesh(new THREE.BoxGeometry(2.2,h,0.9),new THREE.MeshStandardMaterial({color:0x3a1020,roughness:0.5}));
-    step.position.set(24,h/2,z); scene.add(step);
-  }
-  const sf=new THREE.Mesh(new THREE.PlaneGeometry(2.5,11),new THREE.MeshStandardMaterial({color:0x1a0a1e,roughness:0.9}));
-  sf.rotation.x=-Math.PI/2; sf.position.set(24,-0.05,-5); scene.add(sf);
-  addWallBox(0.2,4,11,22.8,2,-5,new THREE.MeshStandardMaterial({color:0x2a1040,roughness:0.8}));
-  addWallBox(0.2,4,11,25.2,2,-5,new THREE.MeshStandardMaterial({color:0x2a1040,roughness:0.8}));
-  addWallBox(2.5,4,0.2,24,2,-10.5,new THREE.MeshStandardMaterial({color:0x2a1040,roughness:0.8}));
 
   // Room decorations
   for (let i=0;i<ROOMS.length;i++) buildRoomDecor(ROOMS[i],i);
@@ -192,7 +223,8 @@ window.addWallBox = function(w,h,d,x,y,z,mat) {
 
 function buildRoomDecor(r, idx) {
   if (window.roomGames[idx] && window.roomGames[idx].build) {
-    window.roomGames[idx].build(r, idx);
+    var cfg = (typeof GM !== 'undefined' && GM.getRoomConfig) ? GM.getRoomConfig(idx) : null;
+    window.roomGames[idx].build(r, idx, cfg);
   }
 }
 
@@ -250,10 +282,14 @@ function updateCurrentRoom() {
       if (S.currentRoom!==i) {
         S.currentRoom=i;
         document.getElementById('roomName').textContent=r.name;
-        showNotification(`📍 ${r.name}`,'#8a4bff');
+        showNotification('\uD83D\uDCCD ' + r.name,'#8a4bff');
         playRoomAmbience(i);
         showRoomGame(i);
-        if (window.roomGames[i]&&window.roomGames[i].enter) window.roomGames[i].enter(i);
+        showCompanionDialog('enter');
+        if (window.roomGames[i]&&window.roomGames[i].enter) {
+          var cfg = (typeof GM !== 'undefined' && GM.getRoomConfig) ? GM.getRoomConfig(i) : null;
+          window.roomGames[i].enter(i, cfg);
+        }
       }
       break;
     }
@@ -364,7 +400,7 @@ window.damageMonster = function(m,dmg) {
       p.position.copy(m.mesh.position);p.position.x+=(Math.random()-0.5)*0.5;p.position.z+=(Math.random()-0.5)*0.5;p.position.y=0.5+Math.random()*0.5;
       scene.add(p);S.particles.push({mesh:p,vel:{x:(Math.random()-0.5)*3,y:2+Math.random()*2,z:(Math.random()-0.5)*3},life:1});
     }
-    if(m.isBoss){S.bossAlive=false;document.getElementById('bossBar').style.display='none';completeRoomGame(7);}
+    if(m.isBoss){S.bossAlive=false;document.getElementById('bossBar').style.display='none';}
     else{S.monstersKilled++;updateHUD();}
   }
 };
@@ -439,8 +475,8 @@ window.addOracleCrystal = function() {
   const co=new THREE.Mesh(new THREE.IcosahedronGeometry(0.12,0),cm);co.position.y=0.4;g.add(co);
   const pm=new THREE.MeshStandardMaterial({color:0x444466,roughness:0.3,metalness:0.5});
   const p=new THREE.Mesh(new THREE.CylinderGeometry(0.25,0.35,0.25,12),pm);p.position.y=0.12;g.add(p);
-  g.position.set(6.5,0,3.5);scene.add(g);S.oracleCrystal=g;
-  S.oracleLight=new THREE.PointLight(0x8a4bff,0.5,4);S.oracleLight.position.set(6.5,0.8,3.5);scene.add(S.oracleLight);
+  g.position.set(6.5,0,0);scene.add(g);S.oracleCrystal=g;
+  S.oracleLight=new THREE.PointLight(0x8a4bff,0.5,4);S.oracleLight.position.set(6.5,0.8,0);scene.add(S.oracleLight);
 };
 
 // ======================== AUDIO ========================
@@ -505,25 +541,35 @@ window.showRoomGame = function(idx) {
   const hud=document.getElementById('minigameHud'),timer=document.getElementById('mgTimer'),obj=document.getElementById('mgObjective'),prog=document.getElementById('mgProgress');
   if(S.roomsDone[idx]){hud.style.display='none';return;}
   hud.style.display='flex';obj.textContent=ROOMS[idx].desc;prog.innerHTML='';
-  if(window.roomGames[idx]&&window.roomGames[idx].hud)window.roomGames[idx].hud(timer,prog);
+  if(window.roomGames[idx]&&window.roomGames[idx].hud) {
+    var cfg = (typeof GM !== 'undefined' && GM.getRoomConfig) ? GM.getRoomConfig(idx) : null;
+    window.roomGames[idx].hud(timer,prog,cfg);
+  }
   else{timer.textContent='✨';prog.innerHTML='<span style="opacity:0.5">Explore!</span>';}
 };
 
 window.completeRoomGame = function(idx) {
   S.roomsDone[idx]=true;
-  const emojis=['🌅','🖼️','🌺','📚','💀','💎','🎵','⚡'],names=['Welcome!','Key Found!','Garden Saved!','Memory Master!','Survivor!','Crystal Clear!','Perfect Rhythm!','Boss Defeated!'],
-    descs=['The museum awakens...','The golden key is yours!','Moonflowers glow!','Library remembers!','Shadows flee!','Crystals stop!','Hall applauds!','HAPPY BIRTHDAY!'];
+  const emojis=['🎯','🔦','⚡','🏃','🍳'], names=['Bullseye!','Vault Cracked!','Lasers Dodged!','Corridor Cleared!','Master Chef!'],
+    descs=['All targets hit!','Keys recovered!','Arena survived!','Speed run complete!','Perfect dish!'];
   const rc=document.getElementById('roomComplete');
   document.getElementById('rcEmoji').textContent=emojis[idx];document.getElementById('rcLabel').textContent=names[idx];document.getElementById('rcDesc').textContent=descs[idx];
   rc.classList.add('show');setTimeout(()=>rc.classList.remove('show'),2200);
   playNote(523,0.15,'sine');setTimeout(()=>playNote(659,0.15,'sine'),150);setTimeout(()=>playNote(784,0.25,'sine'),300);
   document.getElementById('minigameHud').style.display='none';
   showNotification(`✅ ${names[idx]}`,'#44ff88');
-  if(S.roomsDone.every(d=>d))setTimeout(()=>{document.getElementById('finaleOverlay').classList.remove('hidden');document.exitPointerLock();S.finaleShown=true;launchConfetti();playFinaleMusic();},1000);
+  showCompanionDialog('complete');
+  if(S.roomsDone.every(d=>d))setTimeout(()=>{
+    document.getElementById('finaleOverlay').classList.remove('hidden');
+    if(document.exitPointerLock) document.exitPointerLock();
+    S.finaleShown=true;launchConfetti();playFinaleMusic();
+    showCompanionDialog('finale');
+  },1000);
 };
 
 window.gameOver = function() {
   S.gameOver=true;document.getElementById('gameOverOverlay').classList.remove('hidden');document.exitPointerLock();
+  showCompanionDialog('death');
 };
 
 window.launchConfetti = function() {
