@@ -13,7 +13,7 @@ window.NVIDIA = {
 window.CFG = {
   health: 100, moveSpeed: 3.5, sprintMult: 1.6, height: 1.6, radius: 0.3,
   pistolDmg: 25, shotgunDmg: 14, shotgunPellets: 5, shotgunAmmo: 15,
-  mouseSens: 0.0018, mouseSmooth: 9
+  mouseSens: 0.0018, mouseSmooth: 9, gravity: 14, jumpSpeed: 6
 };
 
 // ======================== ROOM DEFINITIONS ========================
@@ -55,7 +55,6 @@ window.S = {
   monsters:[], bullets:[], orbs:[], dodgeObstacles:[], particles:[],
   audioCtx:null, roomAmbience:null, oracleCooldown:0,
   oracleCrystal:null, oracleLight:null,
-  targetYaw:0, targetPitch:0,
   shakeTimer:0, shakeOffset:{x:0,y:0}
 };
 
@@ -64,11 +63,7 @@ window.roomGames = {};
 
 // ======================== THREE.JS ========================
 let scene, camera, renderer, clock;
-window.player = {x:3, y:1.6, z:0};
-let yaw = 0, pitch = 0;
-const pitchLimit = Math.PI / 2.3;
-const input = {fwd:false, back:false, left:false, right:false, sprint:false};
-let pointerLocked = false;
+window.player = {x:3, y:1.6, z:0, vy:0};
 const wallBoxes = [];
 
 // ======================== INIT ========================
@@ -102,8 +97,7 @@ window.initEngine = function() {
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  setupPointerLock();
-  setupInput();
+  if(window.CONTROLS) window.CONTROLS.init();
   setupInteraction();
   initAudio();
   animate();
@@ -239,23 +233,19 @@ function showHitMarker() {
 
 // ======================== PLAYER ========================
 function updatePlayer(dt) {
-  if (!S.entered||S.gameOver||!pointerLocked) return;
-  const speed = input.sprint ? CFG.moveSpeed*1.4 : CFG.moveSpeed;
-  const fwd=new THREE.Vector3(0,0,-1).applyAxisAngle(new THREE.Vector3(0,1,0),yaw);
-  const right=new THREE.Vector3(1,0,0).applyAxisAngle(new THREE.Vector3(0,1,0),yaw);
-  let dx=0,dz=0;
-  if (input.fwd){dx+=fwd.x*speed*dt;dz+=fwd.z*speed*dt;}
-  if (input.back){dx-=fwd.x*speed*dt;dz-=fwd.z*speed*dt;}
-  if (input.left){dx-=right.x*speed*dt;dz-=right.z*speed*dt;}
-  if (input.right){dx+=right.x*speed*dt;dz+=right.z*speed*dt;}
-  if (dx!==0&&dz!==0){dx*=0.707;dz*=0.707;}
-  const nx=player.x+dx,nz=player.z+dz;
-  const box=new THREE.Box3(new THREE.Vector3(nx-CFG.radius,0,nz-CFG.radius),new THREE.Vector3(nx+CFG.radius,2,nz+CFG.radius));
-  let blocked=false;
-  for (const w of wallBoxes) if (box.intersectsBox(w)){blocked=true;break;}
-  if (!blocked){player.x=nx;player.z=nz;}
-  player.y = CFG.height;
-  camera.position.set(player.x, CFG.height, player.z);
+  if (!S.entered||S.gameOver||!window.CONTROLS||!window.CONTROLS.pointerLocked) return;
+
+  window.CONTROLS.update(dt);
+
+  // Sync player position from CONTROLS
+  player.x = window.CONTROLS.player.x;
+  player.z = window.CONTROLS.player.z;
+  player.y = window.CONTROLS.player.y;
+  player.vy = window.CONTROLS.player.vy;
+
+  var eyeY = window.CONTROLS.keys.crouch ? CFG.height * 0.6 : CFG.height;
+  camera.position.set(player.x, player.y, player.z);
+
   // Screen shake
   if(S.shakeTimer > 0) {
     S.shakeTimer -= dt;
@@ -263,15 +253,20 @@ function updatePlayer(dt) {
     camera.position.y += S.shakeOffset.y;
     if(S.shakeTimer <= 0) { S.shakeOffset.x = 0; S.shakeOffset.y = 0; }
   }
-  // Smooth camera toward target using frame-rate-independent lerp
-  const smoothFactor = 1 - Math.exp(-CFG.mouseSmooth * dt);
-  yaw += (S.targetYaw - yaw) * smoothFactor;
-  pitch += (S.targetPitch - pitch) * smoothFactor;
-  camera.rotation.set(pitch, yaw, 0);
+
+  // Use CONTROLS yaw/pitch for camera
+  camera.rotation.set(window.CONTROLS.pitch, window.CONTROLS.yaw, 0);
+
   if (S.entered) updateCurrentRoom();
   checkInteractions();
   if (window.roomGames[S.currentRoom]&&window.roomGames[S.currentRoom].update) {
     window.roomGames[S.currentRoom].update(dt);
+  }
+  // Sync room game position changes back to CONTROLS
+  if (window.CONTROLS) {
+    window.CONTROLS.player.x = player.x;
+    window.CONTROLS.player.z = player.z;
+    window.CONTROLS.player.y = player.y;
   }
 }
 
@@ -296,46 +291,11 @@ function updateCurrentRoom() {
   }
 }
 
-// ======================== POINTER LOCK & MOUSE ========================
-function setupPointerLock() {
-  document.addEventListener('pointerlockchange',()=>{
-    pointerLocked=document.pointerLockElement!==null;
-    document.getElementById('pointerLockHint').style.display=(!pointerLocked&&S.entered)?'flex':'none';
-    document.getElementById('crosshair').style.opacity=pointerLocked?'1':'0';
-  });
-  document.addEventListener('click',()=>{
-    if(!pointerLocked&&S.entered&&!S.gameOver)document.body.requestPointerLock();
-  });
-  // Store raw mouse delta — smoothed in the render loop
-  document.addEventListener('mousemove',e=>{
-    if(!pointerLocked)return;
-    S.targetYaw -= e.movementX * CFG.mouseSens;
-    S.targetPitch -= e.movementY * CFG.mouseSens;
-    S.targetPitch = Math.max(-pitchLimit, Math.min(pitchLimit, S.targetPitch));
-  });
-}
 
-function setupInput() {
-  document.addEventListener('keydown',e=>{
-    if(e.key==='w'||e.key==='W'||e.key==='ArrowUp')input.fwd=true;
-    if(e.key==='s'||e.key==='S'||e.key==='ArrowDown')input.back=true;
-    if(e.key==='a'||e.key==='A'||e.key==='ArrowLeft')input.left=true;
-    if(e.key==='d'||e.key==='D'||e.key==='ArrowRight')input.right=true;
-    if(e.key==='Shift')input.sprint=true;
-  });
-  document.addEventListener('keyup',e=>{
-    if(e.key==='w'||e.key==='W'||e.key==='ArrowUp')input.fwd=false;
-    if(e.key==='s'||e.key==='S'||e.key==='ArrowDown')input.back=false;
-    if(e.key==='a'||e.key==='A'||e.key==='ArrowLeft')input.left=false;
-    if(e.key==='d'||e.key==='D'||e.key==='ArrowRight')input.right=false;
-    if(e.key==='Shift')input.sprint=false;
-  });
-  document.addEventListener('mousedown',e=>{if(e.button===0&&pointerLocked)shoot();});
-}
 
 // ======================== WEAPONS ========================
 function shoot() {
-  if(!pointerLocked||S.gameOver||!S.entered)return;
+  if(!window.CONTROLS||!window.CONTROLS.pointerLocked||S.gameOver||!S.entered)return;
   if(S.weapon==='shotgun'&&S.ammo<=0)return;
   const pellets=S.weapon==='shotgun'?CFG.shotgunPellets:1;
   const dmg=S.weapon==='shotgun'?CFG.shotgunDmg:CFG.pistolDmg;
@@ -348,9 +308,11 @@ function shoot() {
     if(consumed === true) return;
   }
 
+  var cy = window.CONTROLS ? window.CONTROLS.yaw : 0;
+  var cp = window.CONTROLS ? window.CONTROLS.pitch : 0;
   // Muzzle flash
   const flash=new THREE.PointLight(0xffaa66,2,4);
-  flash.position.set(camera.position.x+Math.sin(yaw)*0.5,camera.position.y-0.2,camera.position.z+Math.cos(yaw)*0.5);
+  flash.position.set(camera.position.x+Math.sin(cy)*0.5,camera.position.y-0.2,camera.position.z+Math.cos(cy)*0.5);
   scene.add(flash); setTimeout(()=>scene.remove(flash),80);
 
   // Screen shake
@@ -362,8 +324,8 @@ function shoot() {
     const spread=S.weapon==='shotgun'?0.05:0.003;
     const ray=new THREE.Raycaster();
     const dir=new THREE.Vector3(0,0,-1)
-      .applyAxisAngle(new THREE.Vector3(1,0,0),pitch+(Math.random()-0.5)*spread*2)
-      .applyAxisAngle(new THREE.Vector3(0,1,0),yaw+(Math.random()-0.5)*spread*2);
+      .applyAxisAngle(new THREE.Vector3(1,0,0),cp+(Math.random()-0.5)*spread*2)
+      .applyAxisAngle(new THREE.Vector3(0,1,0),cy+(Math.random()-0.5)*spread*2);
     ray.set(camera.position,dir);
     for(const m of S.monsters){
       if(!m.alive) continue;
@@ -372,7 +334,6 @@ function shoot() {
       if(ray.ray.distanceToPoint(m.mesh.position)<(m.isBoss?1:0.5)){damageMonster(m,dmg);break;}
     }
   }
-  pitch-=0.02;
 }
 
 window.damageMonster = function(m,dmg) {
@@ -434,7 +395,7 @@ window.spawnMonster = function(x,z,isBoss) {
 // ======================== INTERACTION ========================
 function setupInteraction() {
   document.addEventListener('keydown',e=>{
-    if(e.key==='e'||e.key==='E'||e.key===' '){e.preventDefault();tryInteract();}
+    if(e.key==='e'||e.key==='E'){e.preventDefault();tryInteract();}
     if(e.key==='q'||e.key==='Q')switchWeapon();
   });
 }
@@ -693,5 +654,5 @@ function animate() {
 window.getScene = ()=>scene;
 window.getCamera = ()=>camera;
 window.getWallBoxes = ()=>wallBoxes;
-window.getYaw = ()=>yaw;
-window.getPitch = ()=>pitch;
+window.getYaw = function() { return window.CONTROLS ? window.CONTROLS.yaw : 0; };
+window.getPitch = function() { return window.CONTROLS ? window.CONTROLS.pitch : 0; };
